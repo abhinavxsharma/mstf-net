@@ -173,7 +173,7 @@ If you use MSTF-Net in your research, please cite:
 
 ## Authors
 
-**Abhinav Vats**, Poonam Jyoti, Ishika Bhardwaj, Tanvi Garg, Tannu Ghanghas
+**Abhinav Vats**
 
 Department of Computer Science and Engineering (AI & ML),
 Chandigarh University, Mohali, Punjab 140413, India
@@ -181,7 +181,7 @@ Chandigarh University, Mohali, Punjab 140413, India
 📧 vats.abhinav247@gmail.com |
 🐙 [GitHub](https://github.com/abhinavxsharma) |
 🤗 [HuggingFace](https://huggingface.co/ixabhinavsharma) |
-📊 [W&B](https://wandb.ai/i-abhinavxsharma)
+📊 [W&B]([https://wandb.ai/i-abhinavxsharma](https://wandb.ai/i-abhinavxsharma-chandigarh-university/mstf-net))
 
 ---
 
