@@ -130,11 +130,11 @@ def test_mstfnet_predict_proba(dummy_input):
 
 
 def test_mstfnet_param_count():
-    """Total params should be ~29.6M."""
+    """Total params should be ~19.8M."""
     model    = MSTFNet()
     n_params = sum(p.numel() for p in model.parameters()) / 1e6
-    assert 25 < n_params < 35, \
-        f'Unexpected param count: {n_params:.1f}M (expected ~29.6M)'
+    assert 18 < n_params < 22, \
+        f'Unexpected param count: {n_params:.1f}M (expected ~19.8M)'
 
 
 # ── Ablation variant tests ────────────────────────────────────

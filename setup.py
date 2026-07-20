@@ -3,10 +3,10 @@ from setuptools import setup, find_packages
 setup(
     name='mstfnet',
     version='1.0.0',
-    author='Abhinav Vats, Poonam Jyoti, Ishika Bhardwaj, Tanvi Garg, Tannu Ghanghas',
+    author='Abhinav Vats',
     author_email='vats.abhinav247@gmail.com',
     description='MSTF-Net: Adaptive Multi-Stream Deepfake Detection via Dynamic Spectral-Temporal Gating',
-    long_description=open('README.md').read(),
+    long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/abhinavxsharma/mstf-net',
     packages=find_packages(),

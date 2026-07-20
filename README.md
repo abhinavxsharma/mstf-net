@@ -160,8 +160,7 @@ If you use MSTF-Net in your research, please cite:
 @inproceedings{vats2026mstfnet,
   title     = {MSTF-Net: Adaptive Multi-Stream Deepfake Detection via
                Dynamic Spectral-Temporal Gating},
-  author    = {Vats, Abhinav and Jyoti, Poonam and Bhardwaj, Ishika and
-               Garg, Tanvi and Ghanghas, Tannu},
+  author    = {Vats, Abhinav},
   booktitle = {International Symposium on Synthetic Media Attribution
                and Detection (ISSMAD)},
   year      = {2026},

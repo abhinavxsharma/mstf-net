@@ -7,8 +7,7 @@ Dynamic Spectral-Temporal Gating
 Accepted at ISSMAD 2026
 (co-sponsored by Google + IEEE Signal Processing Society)
 
-Authors: Abhinav Vats, Poonam Jyoti, Ishika Bhardwaj,
-         Tanvi Garg, Tannu Ghanghas
+Authors: Abhinav Vats
          Chandigarh University, Mohali, Punjab, India
 
 Quick start:
