@@ -1,0 +1,42 @@
+# ── NEVER commit these ────────────────────────────────────────
+.env
+*.env
+secrets.sh
+keys.sh
+wandb_key.txt
+hf_token.txt
+
+# ── Python ────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Model weights (too large for GitHub, use HuggingFace) ─────
+weights/
+*.pth
+*.pt
+*.ckpt
+
+# ── Data ──────────────────────────────────────────────────────
+*.zip
+*.tar.gz
+frames/
+df_tmp/
+
+# ── Logs ──────────────────────────────────────────────────────
+wandb/
+lightning_logs/
+*.log
+
+# ── IDE ───────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# ── Jupyter ───────────────────────────────────────────────────
+.ipynb_checkpoints/

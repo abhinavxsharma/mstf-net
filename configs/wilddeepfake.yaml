@@ -1,0 +1,53 @@
+# ============================================================
+# MSTF-Net — WildDeepfake Training Config
+#
+# Dataset: WildDeepfake (xingjunm/WildDeepfake on HuggingFace)
+# Size   : ~72GB raw, ~5GB after zip frames
+# Split  : Official train/test (~50/50 balanced)
+#
+# Lightning AI paths:
+#   /teamspace/studios/this_studio  ← writable SSD, resets each session
+#   Google Drive via rclone         ← permanent storage
+# ============================================================
+
+dataset:
+  name: wilddeepfake
+  frames_root: /teamspace/studios/this_studio/wilddeepfake
+  img_size: 224
+  n_frames: 8
+
+model:
+  feature_dim: 256
+  tau_min: 0.1
+  tau_max: 2.0
+  cls_dropout: 0.4
+
+training:
+  seeds: [42, 123, 456, 789, 1011]
+  epochs: 10
+  batch_size: 512
+  lr: 2.0e-4
+  weight_decay: 0.0
+  grad_clip_norm: 1.0
+  early_stopping_patience: 4
+  amp: true
+
+optimizer:
+  name: adamw
+  betas: [0.9, 0.999]
+  eps: 1.0e-8
+
+paths:
+  frames_root:    /teamspace/studios/this_studio/wilddeepfake
+  checkpoint_dir: /teamspace/studios/this_studio/MSTF_checkpoints_wild
+  results_dir:    /teamspace/studios/this_studio/MSTF_results_wild
+
+wandb:
+  enabled: true
+  project: mstf-net
+  entity: i-abhinavxsharma-chandigarh-university
+  tags: [wilddeepfake, issmad2026, deepfake-detection]
+
+huggingface:
+  enabled: true
+  repo_id: ixabhinavsharma/mstf-net
