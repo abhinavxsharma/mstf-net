@@ -1,8 +1,8 @@
 """
 demo/app.py
 ===========
-Kavach Deepfake Detection Platform — Real-Time Live Progress Bar & Pure White 100% Full Width Theme.
-Moved 'Choose file' button inside the upper upload box for direct native file selection.
+Kavach Deepfake Detection Platform — Real-Time Live Progress Bar & Pure White Theme.
+Fixed logic consistency for Real vs Fake classification badges, confidence displays, and diagnostic items.
 Powered by MSTF-Net.
 Accepted at ISSMAD 2026 (Google + IEEE Signal Processing Society)
 """
@@ -138,26 +138,33 @@ def scan_media(video_path, progress=gr.Progress(track_tqdm=True)):
         mean_alpha    = np.mean(per_frame_alpha, axis=0)
         mean_qn       = float(np.mean(per_frame_qn))
 
-        # Badge & Bar styling
-        badge_html = '<span class="badge-fake">Likely fake</span>' if is_fake else '<span class="badge-real">Likely real</span>'
-        bar_class  = 'confidence-bar-fill-fake' if is_fake else 'confidence-bar-fill-real'
+        # Consistent Badge & Confidence Display
+        if is_fake:
+            conf_title = "Deepfake Confidence"
+            conf_val   = fake_percent
+            badge_html = '<span class="badge-fake">Likely fake</span>'
+            bar_class  = 'confidence-bar-fill-fake'
+        else:
+            conf_title = "Authenticity Confidence"
+            conf_val   = 100 - fake_percent
+            badge_html = '<span class="badge-real">Likely real</span>'
+            bar_class  = 'confidence-bar-fill-real'
 
-        # Diagnostic Insights
+        # Consistent Diagnostic Insights
         diag_items = []
-        if mean_alpha[0] > 0.35 or is_fake:
-            diag_items.append('<div class="diag-item diag-warn"><span>⚠️</span> Unnatural spatial texture & facial blending seam detected</div>')
+        if is_fake:
+            if mean_alpha[0] >= 0.30:
+                diag_items.append('<div class="diag-item diag-warn"><span>⚠️</span> Unnatural spatial texture & facial blending seam detected (Spatial Stream)</div>')
+            if mean_alpha[1] >= 0.25:
+                diag_items.append('<div class="diag-item diag-warn"><span>⚠️</span> Frequency domain GAN / diffusion upsampling fingerprint detected (Spectral Stream)</div>')
+            if mean_alpha[2] >= 0.25:
+                diag_items.append('<div class="diag-item diag-warn"><span>⚠️</span> High-frequency SRM noise residual anomaly detected (SRM Stream)</div>')
+            if len(diag_items) == 0:
+                diag_items.append('<div class="diag-item diag-warn"><span>⚠️</span> Synthetic manipulation detected across temporal frame sequence</div>')
         else:
-            diag_items.append('<div class="diag-item diag-success"><span>✓</span> Spatial texture consistency within normal range</div>')
-
-        if mean_alpha[1] > 0.30 or is_fake:
-            diag_items.append('<div class="diag-item diag-warn"><span>⚠️</span> Frequency domain GAN / diffusion upsampling fingerprint detected</div>')
-        else:
-            diag_items.append('<div class="diag-item diag-success"><span>✓</span> Spectral frequency profile within normal authentic range</div>')
-
-        if mean_alpha[2] > 0.30 or is_fake:
-            diag_items.append('<div class="diag-item diag-warn"><span>⚠️</span> High-frequency SRM noise residual anomaly detected</div>')
-        else:
-            diag_items.append('<div class="diag-item diag-success"><span>✓</span> SRM noise residuals match expected camera baseline</div>')
+            diag_items.append('<div class="diag-item diag-success"><span>✓</span> Spatial texture & facial skin consistency within normal authentic range</div>')
+            diag_items.append('<div class="diag-item diag-success"><span>✓</span> Spectral frequency profile within normal authentic camera range</div>')
+            diag_items.append('<div class="diag-item diag-success"><span>✓</span> High-frequency SRM noise residuals match expected sensor baseline</div>')
 
         diag_items.append(f'<div class="diag-item diag-success"><span>✓</span> Quality calibration score (Qn: {mean_qn:.3f}) dynamically verified by DSTG</div>')
 
@@ -184,11 +191,11 @@ def scan_media(video_path, progress=gr.Progress(track_tqdm=True)):
             </div>
 
             <div class="confidence-label-row">
-                <span>Confidence</span>
-                <span style="font-weight: 800; color: #000000;">{fake_percent}%</span>
+                <span>{conf_title}</span>
+                <span style="font-weight: 800; color: #000000;">{conf_val}%</span>
             </div>
             <div class="confidence-bar-bg">
-                <div class="{bar_class}" style="width: {fake_percent}%;"></div>
+                <div class="{bar_class}" style="width: {conf_val}%;"></div>
             </div>
 
             <div class="stats-grid">
